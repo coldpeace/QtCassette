@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<qnx xmlns="http://www.qnx.com/schemas/application/1.0">
+    <id>com.example.cassette</id>
+    <name>cassette</name>
+    <versionNumber>1.0.0</versionNumber>
+    <description>DESCRIPTION</description>
+    <initialWindow>
+        <autoOrients>true</autoOrients>
+        <systemChrome>standard</systemChrome>
+        <transparent>false</transparent>
+    </initialWindow>
+    <author>Qt</author>
+    <copyright>COPYRIGHT</copyright>
+    <env value="app/native/imports:/accounts/devuser/qt5/qml:/usr/lib/qt5/qml" var="QML2_IMPORT_PATH"/>
+    <env value="app/native/plugins:/accounts/devuser/qt5/plugins:/usr/lib/qt5/plugins" var="QT_PLUGIN_PATH"/>
+    <env value="app/native/lib:/accounts/devuser/qt5/lib:/usr/lib/qt5/lib" var="LD_LIBRARY_PATH"/>
+    <arg>-platform</arg>
+    <arg>qnx</arg>
+    <action system="true">run_native</action>
+    <action>access_shared</action>
+    <!-- cassette should point to the project binary, path can be relative -->
+    <asset path="cassette" type="Qnx/Elf" entry="true">cassette</asset>
+    <asset path="%SRC_DIR%/qml">qml</asset>
+    <!--    <asset path="%QT_INSTALL_LIBS%">lib</asset>
+    <asset path="%QT_INSTALL_PLUGINS%">plugins</asset>
+    <asset path="%QT_INSTALL_QML%">imports</asset> -->
+    <!-- These values will be replaced when deploying in Qt Creator -->
+    <authorId>gYAAgMkZ-FtCSqZgPvsayOvkBcI</authorId>
+</qnx>
