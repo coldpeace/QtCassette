@@ -16,11 +16,11 @@ Rectangle {
         songList.clear();
         index = 0;
         currentAlbum = album.split("/").pop(-1);
-        console.log(album);
         var list = mediaBackend.songList(album);
         size = list.length;
         for (var i = 0; i < size; i++) {
             songList.append({title: list[i].split("/").pop(-1), path: list[i]});
+            console.log({title: list[i].split("/").pop(-1), path: list[i]});
         }
         setSong();
     }
@@ -180,13 +180,13 @@ Rectangle {
     ParallelAnimation {
         id: injectAnim
         running: false
-        NumberAnimation { target: cassette; property: "scale"; to: 1.05; duration: 200; easing: Easing.InCurve}
+        NumberAnimation { target: cassette; property: "scale"; to: 1.05; duration: 200; easing.type: Easing.InCurve}
     }
 
     ParallelAnimation {
         id: rejectAnim
         running: false
-        NumberAnimation { target: cassette; property: "scale"; to: 1; duration: 200; easing: Easing.OutCurve}
+        NumberAnimation { target: cassette; property: "scale"; to: 1; duration: 200; easing.type: Easing.OutCurve}
     }
 
 }

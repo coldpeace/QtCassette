@@ -19,7 +19,7 @@
     <action system="true">run_native</action>
     <action>access_shared</action>
     <!-- cassette should point to the project binary, path can be relative -->
-    <asset path="cassette" type="Qnx/Elf" entry="true">cassette</asset>
+    <asset type="Qnx/Elf" path="cassette" entry="true">cassette</asset>
     <asset path="%SRC_DIR%/qml">qml</asset>
     <!--    <asset path="%QT_INSTALL_LIBS%">lib</asset>
     <asset path="%QT_INSTALL_PLUGINS%">plugins</asset>

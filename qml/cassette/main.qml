@@ -69,9 +69,10 @@ Rectangle {
     }
 
     Component.onCompleted: {
+        console.log("on Completed...");
         var albumlist = mediaBackend.albumList();
-
         for (var i = 0; i < albumlist.length; i++) {
+            console.log("Yes...");
             console.log(albumlist[i])
             albumModel.append({index: i, path: albumlist[i], title: albumlist[i].split("/").pop(-1)})
 

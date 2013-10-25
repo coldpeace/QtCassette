@@ -1,5 +1,24 @@
 #include "mediabackend.h"
 #include <QDirIterator>
+#include <qdebug.h>
+
+static QStringList songs(const QString &album)
+{
+    qDebug() << Q_FUNC_INFO << album;
+    QStringList songs;
+    QDirIterator it(album, QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks,
+                    QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        QString subDir = it.next();
+        qDebug() << subDir;
+        QStringList audioFiles = QDir(subDir).entryList(QStringList() << "*.mp3");
+        qDebug() << audioFiles.size();
+        if (!audioFiles.isEmpty())
+            songs << subDir;
+    }
+
+    return songs;
+}
 
 MediaBackend::MediaBackend(QObject *parent) :
     QObject(parent)
@@ -22,19 +41,16 @@ QStringList MediaBackend::albumList()
 {
     QStringList albumList;
     QString musicDir = QDir::homePath();
+    QString sdCard = QDir::homePath();
 #if defined(Q_OS_MAC)
     musicDir.append("/Music/Music");
 #elif defined(Q_OS_QNX)
     musicDir = "/accounts/1000/shared";
+    sdCard = "/accounts/1000/removable/sdcard/";
 #endif
-    QDirIterator it(musicDir, QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks,
-                    QDirIterator::Subdirectories);
-    while (it.hasNext()) {
-        QString subDir = it.next();
-        QStringList audioFiles = QDir(subDir).entryList(QStringList() << "*.mp3");
-        if (!audioFiles.isEmpty())
-            albumList << subDir;
-    }
+    albumList = songs(musicDir);
+    if (!songs(sdCard).isEmpty())
+        albumList <<   songs(sdCard);
 
     return albumList;
 }
